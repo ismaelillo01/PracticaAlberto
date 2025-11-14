@@ -10,10 +10,9 @@ public class Main {
                 +"3. Ver/Modificar URL del feed\n"
                 +"0. Salir\n"
                 +"Elije una opción: ";
-        int menu=entrada.nextInt();
-
-        System.out.println(textoMenu);
         do{
+            System.out.println(textoMenu);
+            int menu=entrada.nextInt();
             switch (menu){
                 case 1:
                     System.out.println("Actualizando noticias...");
