@@ -2,11 +2,16 @@ import java.io.*;
 
 public class Configuracion implements Serializable {
     private String urlFeed;
-    private static final String PATH="../data/config.ser";
+    private static final String PATH=System.getProperty("user.dir")+"\\ProyectoAlberto\\data\\config.ser";
 
 
     public Configuracion(){
         this.urlFeed="https://www.xataka.com/feedburner.xml";
+    }
+
+
+    public Configuracion(String urlFeed){
+        this.urlFeed=urlFeed;
     }
 
     public void guardarConfig(){
