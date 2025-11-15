@@ -16,7 +16,12 @@ public class Configuracion implements Serializable {
 
     public void guardarConfig(){
         try {
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(PATH));
+            File file=new File(PATH);
+            if (!file.exists()){
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(file));
             oos.writeObject(this);
             oos.close();
             System.out.println("Configuracion guardada en "+PATH);
