@@ -40,6 +40,7 @@ public class LectorRSS {
                     noticia.setTitulo(titulo);
                     noticia.setLink(link);
                     noticia.setFecha(parsearFecha(pubDate));
+                    noticia.setFuente(url.getHost());
                     noticias.add(noticia);
                 }
             }

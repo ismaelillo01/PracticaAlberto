@@ -1,9 +1,13 @@
 import java.sql.SQLOutput;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
         Scanner entrada=new Scanner(System.in);
+        Configuracion config= Configuracion.cargarConfig();
+        Logger logger = new Logger();
+        LectorRSS lector=new LectorRSS();
         String textoMenu="---ASISTENTE DIGITAL DE NOTICIAS---\n"
                 +"1. Actualizar noticias desde el feed\n"
                 +"2. Generar informe HTML del dia\n"
@@ -11,10 +15,8 @@ public class Main {
                 +"0. Salir\n"
                 +"Elije una opción: ";
 
-        Logger logger = new Logger();
         logger.log(">>> Aplicación iniciada.");
-
-
+        logger.log("Confiuracion cargada URL actual: "+config.getUrlFeed());
         do{
             System.out.println(textoMenu);
             int menu=entrada.nextInt();
@@ -22,6 +24,17 @@ public class Main {
                 case 1:
                     System.out.println("Actualizando noticias...");
                     logger.log(">>> Actualizando noticias...");
+                    List<Noticia> noticias=lector.leerFeed(config.getUrlFeed());
+                    if (noticias.isEmpty()){
+                        logger.log("No hay noticias nuevas.");
+                    }else{
+                        logger.log("Se han actualizado "+noticias.size()+" noticias.");
+                        //para mañana ArchivoNoticias
+                        for(Noticia n : noticias) {
+                            System.out.println("  - " + n);
+                        }
+                    }
+
                     break;
                 case 2:
                     System.out.println("Generando informe HTML...");
@@ -32,7 +45,6 @@ public class Main {
                     logger.log(">>> Modificando URL del feed...");
                     System.out.println("Añade una nueva url");
                     String url=entrada.next();
-                    Configuracion config= new Configuracion();
                     if (url.length()>0) {
                         config.setUrlFeed(url);
                     }else{
