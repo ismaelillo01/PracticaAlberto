@@ -10,9 +10,6 @@ public class Configuracion implements Serializable {
     }
 
 
-    public Configuracion(String urlFeed){
-        this.urlFeed=urlFeed;
-    }
 
     public void guardarConfig(){
         try {
@@ -42,5 +39,11 @@ public class Configuracion implements Serializable {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+    public String getUrlFeed() {
+        return urlFeed;
+    }
+    public void setUrlFeed(String urlFeed) {
+        this.urlFeed = urlFeed;
     }
 }
