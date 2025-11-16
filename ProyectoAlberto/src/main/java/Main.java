@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
-        Configuracion.cargarConfig();
         Scanner entrada=new Scanner(System.in);
         String textoMenu="---ASISTENTE DIGITAL DE NOTICIAS---\n"
                 +"1. Actualizar noticias desde el feed\n"
@@ -34,7 +33,11 @@ public class Main {
                     System.out.println("Añade una nueva url");
                     String url=entrada.next();
                     Configuracion config= new Configuracion();
-                    config.setUrlFeed(url);
+                    if (url.length()>0) {
+                        config.setUrlFeed(url);
+                    }else{
+                        System.out.println("No se ha introducido una nueva url se a puesto xataka");
+                    }
                     config.guardarConfig();
                     break;
                 case 0:

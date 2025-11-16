@@ -58,8 +58,7 @@ public class LectorRSS {
     private long parsearFecha(String fechaStr) {
         try {
             SimpleDateFormat parser = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
-            Date fecha = null;
-            fecha = parser.parse(fechaStr);
+            Date fecha = parser.parse(fechaStr);
             return fecha.getTime();
         } catch (ParseException e) {
             throw new RuntimeException(e);

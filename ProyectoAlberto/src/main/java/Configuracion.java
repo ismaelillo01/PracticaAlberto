@@ -1,6 +1,7 @@
 import java.io.*;
 
 public class Configuracion implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String urlFeed;
     private static final String PATH=System.getProperty("user.dir")+"\\ProyectoAlberto\\data\\config.ser";
 
