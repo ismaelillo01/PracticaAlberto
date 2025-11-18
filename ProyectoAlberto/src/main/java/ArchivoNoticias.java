@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArchivoNoticias {
@@ -64,5 +65,21 @@ public class ArchivoNoticias {
             throw new RuntimeException(e);
         }
     }
-
+    private List<Noticia> leerTodasLasNoticias() {
+        try {
+            List<Noticia> noticias = new ArrayList<Noticia>();
+            RandomAccessFile raf = new RandomAccessFile(rutaFichero, "r");
+            while (raf.getFilePointer() < raf.length()) {
+                Noticia n = new Noticia();
+                n.setTitulo(leerStringFijo(raf,TAM_TITULO));
+                n.setLink(leerStringFijo(raf,TAM_LINK));
+                n.setFuente(leerStringFijo(raf,TAM_FUENTE));
+                n.setFecha(raf.readLong());
+                noticias.add(n);
+            }
+            return noticias;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
