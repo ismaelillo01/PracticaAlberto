@@ -8,6 +8,7 @@ public class Main {
         Configuracion config= Configuracion.cargarConfig();
         Logger logger = new Logger();
         LectorRSS lector=new LectorRSS();
+        ArchivoNoticias archivoNoticias=new ArchivoNoticias();
         String textoMenu="---ASISTENTE DIGITAL DE NOTICIAS---\n"
                 +"1. Actualizar noticias desde el feed\n"
                 +"2. Generar informe HTML del dia\n"
@@ -29,12 +30,11 @@ public class Main {
                         logger.log("No hay noticias nuevas.");
                     }else{
                         logger.log("Se han actualizado "+noticias.size()+" noticias.");
-                        //para mañana ArchivoNoticias
+
                         for(Noticia n : noticias) {
-                            System.out.println("  - " + n);
+                            archivoNoticias.guardarNoticia(n);
                         }
                     }
-
                     break;
                 case 2:
                     System.out.println("Generando informe HTML...");
