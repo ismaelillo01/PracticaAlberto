@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Plantilla XSL hecha por inteligencia artificial.
--->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="html" encoding="UTF-8" indent="yes"/>
 
@@ -42,6 +39,10 @@ Plantilla XSL hecha por inteligencia artificial.
                 <xsl:if test="count(resumen/noticia) = 0">
                     <p>No se han encontrado noticias para el día de hoy.</p>
                 </xsl:if>
+
+                <div class="footer">
+                    Generado automáticamente por tu Asistente Digital
+                </div>
             </body>
         </html>
     </xsl:template>

@@ -1,4 +1,5 @@
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,6 +40,10 @@ public class Main {
                 case 2:
                     System.out.println("Generando informe HTML...");
                     logger.log(">>> Generando informe HTML...");
+                    ArchivoNoticias todas=new ArchivoNoticias();
+                    List<Noticia> todasLasNoticias = todas.leerTodasLasNoticias();
+                    GeneradorHTML generador = new GeneradorHTML();
+                    generador.generarInforme(todasLasNoticias);
                     break;
                 case 3:
                     System.out.println("Modificando URL del feed...");

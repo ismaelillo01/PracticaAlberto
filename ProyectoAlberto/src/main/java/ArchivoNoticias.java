@@ -65,7 +65,7 @@ public class ArchivoNoticias {
             throw new RuntimeException(e);
         }
     }
-    private List<Noticia> leerTodasLasNoticias() {
+    public List<Noticia> leerTodasLasNoticias() {
         try {
             List<Noticia> noticias = new ArrayList<Noticia>();
             RandomAccessFile raf = new RandomAccessFile(rutaFichero, "r");
