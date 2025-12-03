@@ -45,6 +45,11 @@ public class Configuracion implements Serializable {
         return urlFeed;
     }
     public void setUrlFeed(String urlFeed) {
-        this.urlFeed = urlFeed;
+        if(urlFeed.length()>0) {
+            this.urlFeed = urlFeed;
+        }else {
+            this.urlFeed="https://www.xataka.com/feedburner.xml";
+            System.out.println("no valido, se ha puesto xataka");
+        }
     }
 }

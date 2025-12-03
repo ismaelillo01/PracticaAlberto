@@ -8,9 +8,10 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList; // <--- NUEVO IMPORT
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+// import java.util.stream.Collectors; // <--- PUEDES BORRAR ESTE IMPORT
 
 public class GeneradorHTML {
 
@@ -24,8 +25,12 @@ public class GeneradorHTML {
         try {
             SimpleDateFormat sdfDia = new SimpleDateFormat("yyyy-MM-dd");
             String hoy = sdfDia.format(new Date());
-
-            List<Noticia> noticiasHoy = noticias.stream().filter(n -> sdfDia.format(new Date(n.getFecha())).equals(hoy)).collect(Collectors.toList());
+            List<Noticia> noticiasHoy = new ArrayList<>();
+            for (Noticia n : noticias) {
+                if (sdfDia.format(new Date(n.getFecha())).equals(hoy)) {
+                    noticiasHoy.add(n);
+                }
+            }
 
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
             Element root = doc.createElement("resumen");
@@ -55,17 +60,14 @@ public class GeneradorHTML {
                 root.appendChild(item);
             }
 
-
             rutaSalida = DIR_REPORTES + "resumen-" + hoy + ".html";
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer(new StreamSource(new File(RUTA_PLANTILLA)));
             transformer.transform(new DOMSource(doc), new StreamResult(new File(rutaSalida)));
 
-
             logger.log("Informe HTML generado correctamente en: " + rutaSalida);
 
         } catch (Exception e) {
-
             logger.log("ERROR: No se ha podido generar el informe HTML (" + rutaSalida + "). Mensaje: " + e.getMessage());
         }
     }
